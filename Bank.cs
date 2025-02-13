@@ -9,7 +9,6 @@ namespace BankomatenNY
 {
     public class Bank
     {
-        public string? BankName {get; set;}
         private App app;
         public Account[] accounts = new Account[10];
         
@@ -20,9 +19,9 @@ namespace BankomatenNY
             app.PrintMenu();
             Console.Clear();
             Console.WriteLine("Tryck enter för att avsluta programmet.");
-            Console.ReadLine();
+            Console.ReadKey();
         }
-        
+        //******************************************************************************************
         public void AddAccounts()
         {
             accounts[0] = new Account(1001, 0);
@@ -36,6 +35,7 @@ namespace BankomatenNY
             accounts[8] = new Account(6789, 0);
             accounts[9] = new Account(7890, 0);
         }
+        //******************************************************************************************
         public bool CheckBalance(int account, double withdrawl) 
         { 
             bool available = false;
@@ -43,10 +43,20 @@ namespace BankomatenNY
             if (balance >= withdrawl) {available = true;}
             return available;
         }
+        //******************************************************************************************
+        public bool IsAccEmpty(int account) 
+        {
+            bool empty;
+            if (accounts[account].Balance == 0) {empty = true;}
+            else {empty = false;}
+            return empty;
+        }
+        //******************************************************************************************
         public void AddMoney(int account, double sum) 
         {
             accounts[account].Balance = sum + accounts[account].Balance;
         }
+        //******************************************************************************************
         public void TakeOutMoney(int account, double sum)
         {
             accounts[account].Balance = accounts[account].Balance - sum;
